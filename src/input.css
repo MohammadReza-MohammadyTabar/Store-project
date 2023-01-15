@@ -85,3 +85,17 @@
 .cool-link:hover::after {
   width: 100%;
 }
+
+.card {
+  /* From https://css.glass */
+
+  box-shadow: 1px 5px 10px rgba(49, 150, 153, 0.8);
+
+  -webkit-backdrop-filter: blur(4.1px);
+}
+
+.section-shadow {
+  box-shadow: 2px 20px 30px rgba(49, 150, 153, 0.8);
+
+  -webkit-backdrop-filter: blur(4.1px);
+}
