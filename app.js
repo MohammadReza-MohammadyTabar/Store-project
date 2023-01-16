@@ -1,9 +1,8 @@
 // let allCatagories;
+let allCatagories;
 const getAllCatagories = async function () {
   try {
-    const response = await axios.get(
-      "https://fakestoreapi.com/products/categories"
-    );
+    const response = await axios.get("categories.json");
     allCatagories = response.data;
 
     return allCatagories;
@@ -25,13 +24,13 @@ getAllCatagories()
       document.querySelectorAll(".catagoriesMenu")[0].innerHTML;
   })
   .catch((error) => {
-    console.log(error);
+    alert(error);
   });
 //get all product data
 let allProductData;
 const getAllProduct = async function () {
   try {
-    const response = await axios.get("https://fakestoreapi.com/products");
+    const response = await axios.get("products.json");
     allProductData = response.data;
     return allProductData;
   } catch (error) {
@@ -40,26 +39,49 @@ const getAllProduct = async function () {
 };
 getAllProduct()
   .then((data) => {
-    data.forEach((element) => {
-      favoriteProduct(element);
+    const favorits = cardsDivHeader("Favorit products");
+    favoriteProduct(data, favorits);
+    allCatagories.forEach((element) => {
+      catagoryProduct(data, cardsDivHeader(element), element);
     });
-    document.querySelector("main").append(favoriteCardsDiv);
   })
   .catch((error) => {
-    console.log(error);
+    alert(error);
   });
-
+//header for card div
+const cardsDivHeader = function (headerName) {
+  //favorite product header
+  const div = document.createElement("div");
+  div.classList =
+    "section-shadow w-[97%] m-auto text-center mt-6 border-b-4 border-gray-500";
+  const span = document.createElement("span");
+  span.classList = "text-2xl";
+  span.append(headerName);
+  div.append(span);
+  document.querySelector("main").append(div);
+  //a dive contain all faivorit product
+  const cardsDiv = document.createElement("div");
+  cardsDiv.classList = `${headerName.replace(
+    /\s/g,
+    ""
+  )} p-9 w-[97%] m-auto overflow-x-auto flex mt-2 mb-9 scrollbar-thin scrollbar-thumb-sky-600 scrollbar-track-base-200`;
+  document.querySelector("main").append(cardsDiv);
+  return cardsDiv;
+};
 //show product base on catagory
-const catagoryProduct = function (data) {};
-const favoriteCardsDiv = document.createElement("div");
-favoriteCardsDiv.classList =
-  "favoritCards p-9 w-[97%] m-auto overflow-x-auto flex mt-2 mb-9 scrollbar-thin scrollbar-thumb-sky-600 scrollbar-track-base-200";
-//favorite product in main page
-// const favoriteCardsDiv = document.querySelector(".favoritCards");
-const favoriteProduct = function (data) {
-  if (data.rating.rate >= 4.5) {
-    favoriteCardsDiv.append(createCard(data));
-  }
+const catagoryProduct = function (data, cardsDiv, catagoryName) {
+  data.forEach((element) => {
+    if (element.category == catagoryName) {
+      cardsDiv.append(createCard(element));
+    }
+  });
+};
+const favoriteProduct = function (data, cardsDiv) {
+  data.forEach((element) => {
+    if (element.rating.rate >= 4.5) {
+      cardsDiv.append(createCard(element));
+    }
+  });
 };
 //create card element function
 const createCard = function (data) {
