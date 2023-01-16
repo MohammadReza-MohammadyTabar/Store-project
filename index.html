@@ -5,6 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    DEX.HTML
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
     <!-- <link
         href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.css"
         rel="stylesheet"
@@ -71,24 +96,24 @@
                 <li class="sm:hidden">
                   <div class="form-control mr-2">
                     <input
-                      id="search"
                       tabindex="0"
                       type="text"
                       placeholder="Search"
-                      class="input input-bordered bg-opacity-80"
+                      class="input input-bordered bg-opacity-80 search"
                     />
                   </div>
                 </li>
               </ul>
             </div>
-            <a class="btn btn-ghost normal-case text-xl">Mohammad</a>
+            <a href="index.html" class="btn btn-ghost normal-case text-xl"
+              >Mohammad</a
+            >
             <div class="form-control mr-2 hidden sm:flex">
               <input
-                id="search"
                 tabindex="0"
                 type="text"
                 placeholder="Search"
-                class="input w-32 bg-opacity-80"
+                class="input w-32 bg-opacity-80 search"
               />
             </div>
           </div>
@@ -443,6 +468,7 @@
     </footer>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/flowbite.min.js"></script> -->
     <script src="../node_modules/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
     <script src="app.js"></script>
     <script src="index.js"></script>
   </body>

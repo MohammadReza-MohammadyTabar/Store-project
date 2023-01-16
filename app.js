@@ -131,3 +131,5 @@ const createCard = function (data) {
   //   favoriteCardsDiv.append(card);
   return card;
 };
+/************************************************************************************************** */
+//search bar
