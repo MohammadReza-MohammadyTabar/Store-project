@@ -31,7 +31,7 @@ let allProductData;
 const getAllProduct = async function () {
   try {
     const response = await axios.get("products.json");
-    allProductData = response.data;
+    allProductData = await response.data;
     return allProductData;
   } catch (error) {
     throw error;
@@ -133,3 +133,40 @@ const createCard = function (data) {
 };
 /************************************************************************************************** */
 //search bar
+const searchInput = document.querySelectorAll(".search");
+
+searchInput.forEach((element) => {
+  element.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      console.log(e.target.value);
+      const h4 = document.createElement("h4");
+      h4.textContent = `search Items for: ${e.target.value}`;
+      h4.classList = "text-center text-xl";
+      const main = document.querySelector("main");
+      main.innerHTML = "";
+      main.append(h4);
+      const searchResultdiv = document.createElement("div");
+      let count = 0;
+      allProductData.forEach((element) => {
+        if (
+          element.title.toLowerCase().includes(e.target.value.toLowerCase())
+        ) {
+          count++;
+          searchResultdiv.append(createCard(element));
+        }
+      });
+      h4.append(` | Search result :${count}`);
+      if (count !== 0) {
+        searchResultdiv.classList =
+          "flex mb-6 p-6 w-[97%] overflow-x-auto flex mt-2 mb-9 scrollbar-thin scrollbar-thumb-sky-600 scrollbar-track-base-200";
+        document.querySelector("main").append(searchResultdiv);
+      } else {
+        const message = document.createElement("h2");
+        message.classList = "text-center";
+        document.querySelector("main").append("Nothing mathches search word!");
+      }
+
+      e.target.value = "";
+    }
+  });
+});
